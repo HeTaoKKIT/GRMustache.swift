@@ -23,7 +23,7 @@
 
 import Foundation
 
-extension NSFormatter: ObjCMustacheBoxable {
+extension NSFormatter: MustacheBoxable {
     
     /**
     Let NSFormatter feed Mustache templates.
@@ -76,14 +76,14 @@ extension NSFormatter: ObjCMustacheBoxable {
     dates: you can safely mix various data types in a section controlled by
     those well-behaved formatters.
     */
-    public override var mustacheBox: ObjCMustacheBox {
+    public override var mustacheBox: MustacheBox {
         // Return a multi-facetted box, because NSFormatter interacts in
         // various ways with Mustache rendering. See the documentation of
         // the filter and willRender methods below for more information.
-        return ObjCMustacheBox(Box(
+        return Box(
             value: self,
             filter: Filter(filter),
-            willRender: willRender))
+            willRender: willRender)
     }
     
     

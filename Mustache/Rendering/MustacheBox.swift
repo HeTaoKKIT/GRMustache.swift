@@ -33,7 +33,7 @@ the Box() function, or BoxAnyObject().
 :see: Box()
 :see: BoxAnyObject()
 */
-public struct MustacheBox {
+public class MustacheBox: NSObject {
     
     // -------------------------------------------------------------------------
     // MARK: - The boxed value
@@ -152,6 +152,7 @@ public struct MustacheBox {
         self.didRender = didRender
         if let render = render {
             self.render = render
+            super.init()
         } else {
             // The default render function: it renders {{variable}} tags as the
             // boxed value, and {{#section}}...{{/}} tags by adding the box to
@@ -161,6 +162,7 @@ public struct MustacheBox {
             // error: "variable 'self.render' captured by a closure before being
             // initialized"
             self.render = { (_, _) in return nil }
+            super.init()
             self.render = { (info: RenderingInfo, error: NSErrorPointer) in
                 switch info.tag.type {
                 case .Variable:
@@ -272,7 +274,7 @@ public struct MustacheBox {
 
 extension MustacheBox : DebugPrintable {
     
-    public var debugDescription: String {
+    public override var debugDescription: String {
         if let value = value {
             return "MustacheBox(\(value))"  // remove "Optional" from the output
         } else {

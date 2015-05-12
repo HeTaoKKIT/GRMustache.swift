@@ -70,7 +70,7 @@ class ReadMeTests: XCTestCase {
         
         let testBundle = NSBundle(forClass: self.dynamicType)
         let template = Template(named: "ReadMeExample2", bundle: testBundle)!
-        let data = ["cats": ["Kitty", "Pussy", "Melba"]]
+        let data = ["cats": ["Kitty", "Pussy", "Melba"]] as NSDictionary
         let rendering = template.render(Box(data))!
         XCTAssertEqual(rendering, "I have 3 cats.")
     }
